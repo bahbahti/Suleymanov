@@ -6,35 +6,34 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import butterknife.ButterKnife
 
 import com.netcracker.application.R
+import com.netcracker.application.data.network.HardwareRepository
+import com.netcracker.application.data.network.HardwareRepositoryProvider
+import kotlinx.android.synthetic.main.detailed_hardware_fragment.*
 
 class DetailedHardwareFragment : Fragment() {
 
-    companion object {
-        fun newInstance() =
-            DetailedHardwareFragment()
-    }
-
     private lateinit var viewModel: DetailedHardwareViewModel
+    private lateinit var hardwareRepository : HardwareRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.detailed_hardware_fragment, container, false)
+        return inflater.inflate(R.layout.user_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(DetailedHardwareViewModel::class.java)
-        // TODO: Use the ViewModel
-/*        val apiHardwareService = ApiHardwareService()
+        hardwareRepository = HardwareRepositoryProvider
+            .providehardwarerepository()
 
-        GlobalScope.launch(Dispatchers.Main) {
-            val hardwareResponse = apiHardwareService.gethardware("1").await()
-            textView.text = hardwareResponse.hardwareStatus.toString()
-        }*/
+        textView_name.text = hardwareRepository.getHardware("20").toString()
+
     }
+
 
 }

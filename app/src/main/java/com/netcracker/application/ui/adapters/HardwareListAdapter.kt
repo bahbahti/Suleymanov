@@ -9,7 +9,7 @@ import com.netcracker.application.data.entity.Hardware
 import com.netcracker.application.listener.ChooseDetailListener
 import kotlinx.android.synthetic.main.source_item.view.*
 
-class HardwareAdapter(list: MutableList<Hardware>) : RecyclerView.Adapter<HardwareAdapter.ViewHolder>() {
+class HardwareListAdapter(list: MutableList<Hardware>) : RecyclerView.Adapter<HardwareListAdapter.ViewHolder>() {
 
     private val mItems: MutableList<Hardware> = list
     private val mListeners: MutableList<ChooseDetailListener> = mutableListOf()
@@ -17,7 +17,9 @@ class HardwareAdapter(list: MutableList<Hardware>) : RecyclerView.Adapter<Hardwa
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.source_item, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view).listen { position, type ->
+            showDetailedHardware(position)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -31,7 +33,29 @@ class HardwareAdapter(list: MutableList<Hardware>) : RecyclerView.Adapter<Hardwa
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val textView = view.hardware_text_view!!
-
     }
+
+    fun addListener(listener: ChooseDetailListener) {
+        mListeners.add(listener)
+    }
+
+    fun showDetailedHardware(position: Int) {
+        mListeners.forEach {
+            it.showDetailedHardware(position)
+        }
+    }
+
+    fun <T: RecyclerView.ViewHolder > T.listen(event: (position: Int, type: Int) -> Unit): T {
+        itemView.setOnClickListener {
+            event.invoke(adapterPosition, itemViewType)
+        }
+        return this
+    }
+
+    operator fun get(position: Int): Hardware {
+        return mItems[position]
+    }
+
+
 
 }

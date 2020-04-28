@@ -7,8 +7,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.netcracker.application.R
-import com.netcracker.application.data.network.HardwareRepository
-import com.netcracker.application.data.network.HardwareRepositoryProvider
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
