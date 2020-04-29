@@ -1,9 +1,7 @@
 package com.netcracker.application.data.network
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.netcracker.application.data.entity.ContentResponse
 import com.netcracker.application.data.entity.Hardware
-import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -24,14 +22,12 @@ interface ApiHardwareService {
 
     companion object Factory{
         fun create(): ApiHardwareService {
-        //operator fun invoke(connectivityInterceptor: ConnectivityInterceptor): ApiHardwareService {
 
             val logging = HttpLoggingInterceptor()
             logging.level = (HttpLoggingInterceptor.Level.BODY)
 
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(logging)
-                //.addInterceptor(connectivityInterceptor)
                 .build()
 
             return Retrofit.Builder()

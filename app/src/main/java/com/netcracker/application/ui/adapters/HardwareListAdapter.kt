@@ -56,6 +56,4 @@ class HardwareListAdapter(list: MutableList<Hardware>) : RecyclerView.Adapter<Ha
         return mItems[position]
     }
 
-
-
 }
