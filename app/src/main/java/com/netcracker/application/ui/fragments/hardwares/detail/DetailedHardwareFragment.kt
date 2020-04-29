@@ -44,8 +44,8 @@ class DetailedHardwareFragment : Fragment() {
                 .subscribe {
                     text_view_name.text = it.name
                     text_view_id.text = idField + it.id.toString()
-                    text_view_serial.text = statusField + it.serial
-                    text_view_status.text = serialField + it.hardwareStatus.name
+                    text_view_serial.text = serialField + it.serial
+                    text_view_status.text = statusField + it.hardwareStatus.name
                 }
         )
 
