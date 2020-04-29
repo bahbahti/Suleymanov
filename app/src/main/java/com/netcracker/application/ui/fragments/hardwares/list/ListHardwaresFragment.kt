@@ -1,12 +1,12 @@
 package com.netcracker.application.ui.fragments.hardwares.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -68,10 +68,9 @@ class ListHardwaresFragment : Fragment(), ChooseDetailListener {
     }
 
     override fun showDetailedHardware(position: Int) {
-        //val intent = Intent(context, DetailedHardwareFragment::class.java)
-        //intent.putExtra("id", listAdapter[position].id)
-        //startActivity(intent)
-       findNavController().navigate(R.id.detailedHardwareFragment)
+        findNavController().navigate(ListHardwaresFragmentDirections.actionDetail()
+            .setDetailedHardwareId(listAdapter[position].id.toString())
+        )
     }
 
 }

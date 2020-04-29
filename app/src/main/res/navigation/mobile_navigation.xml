@@ -3,17 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/userFragment">
+    app:startDestination="@id/listHardwaresFragment">
 
-    <fragment
-        android:id="@+id/userFragment"
-        android:name="com.netcracker.application.ui.fragments.users.UserFragment"
-        android:label="user_fragment"
-        tools:layout="@layout/user_fragment" />
     <fragment
         android:id="@+id/listHardwaresFragment"
         android:name="com.netcracker.application.ui.fragments.hardwares.list.ListHardwaresFragment"
-        android:label="list_hardwares_fragment"
+        android:label="Hardwares"
         tools:layout="@layout/list_hardwares_fragment" >
         <action
             android:id="@+id/actionDetail"
@@ -22,11 +17,12 @@
     <fragment
         android:id="@+id/detailedHardwareFragment"
         android:name="com.netcracker.application.ui.fragments.hardwares.detail.DetailedHardwareFragment"
-        android:label="detailed_hardware_fragment"
+        android:label="Hardware"
         tools:layout="@layout/detailed_hardware_fragment" >
         <argument
-            android:name="detailedHardware"
-            app:argType="string" />
+            android:name="detailedHardwareId"
+            app:argType="string"
+            android:defaultValue="default" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
