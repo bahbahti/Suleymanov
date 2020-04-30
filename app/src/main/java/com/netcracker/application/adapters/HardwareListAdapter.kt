@@ -1,4 +1,4 @@
-package com.netcracker.application.ui.adapters
+package com.netcracker.application.adapters
 
 import android.view.LayoutInflater
 import android.view.View

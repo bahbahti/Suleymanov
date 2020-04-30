@@ -16,7 +16,7 @@ import com.netcracker.application.data.entity.Hardware
 import com.netcracker.application.data.network.HardwareRepository
 import com.netcracker.application.data.network.HardwareRepositoryProvider
 import com.netcracker.application.listener.ChooseDetailListener
-import com.netcracker.application.ui.adapters.HardwareListAdapter
+import com.netcracker.application.adapters.HardwareListAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

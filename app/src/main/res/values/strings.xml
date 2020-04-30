@@ -4,4 +4,14 @@
     <string name="hardwares">Hardwares</string>
     <string name="settings">Settings</string>
     <string name="loading">Loading</string>
+    <string name="update">UPDATE</string>
+    <string name="update_status">update status</string>
+
+    <string-array name="status_array">
+        <item>NORMAL</item>
+        <item>FAILED</item>
+        <item>UNDER-MAINT</item>
+        <item>TO-REPLACE</item>
+    </string-array>
+
 </resources>

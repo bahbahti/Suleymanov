@@ -68,4 +68,24 @@
         app:layout_constraintTop_toBottomOf="@+id/text_view_id"
         tools:text="NORMAL" />
 
+    <Spinner
+        android:id="@+id/hardware_spinner"
+        android:layout_width="130dp"
+        android:layout_height="27dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_serial"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/update_status"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="225dp"
+        tools:layout_editor_absoluteY="302dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
