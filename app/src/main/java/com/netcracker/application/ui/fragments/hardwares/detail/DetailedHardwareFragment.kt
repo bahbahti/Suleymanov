@@ -22,6 +22,7 @@ class DetailedHardwareFragment : Fragment() {
 
     private lateinit var hardwareRepository : HardwareRepository
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    var initStatusId : Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,14 +42,13 @@ class DetailedHardwareFragment : Fragment() {
         hardware_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                prosessButtonClick(position)
+                prosessButtonClick(position + 1)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
+
             }
         }
-
     }
 
     private fun prosessGetList() {
@@ -56,12 +56,19 @@ class DetailedHardwareFragment : Fragment() {
             hardwareRepository.getHardware(DetailedHardwareFragmentArgs.fromBundle(requireArguments()).detailedHardwareId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe {
-                    text_view_id.text = it.hardwareStatus.id.toString()
+                .subscribe ({
+                    initStatusId = it.hardwareStatus.id.toString().toInt()
+
+                    hardware_spinner.setSelection(initStatusId - 1)
+                    text_view_id.text = it.id.toString()
                     text_view_name.text = it.name
                     text_view_serial.text = it.serial
-                    text_view_status.text = it.hardwareStatus.name
-                }
+                    //text_view_status.text = it.hardwareStatus.toString()
+
+                }, {
+                        throwable -> Log.d("excepton: ", throwable.message)
+                        Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show()
+                })
         )
     }
 
@@ -71,18 +78,18 @@ class DetailedHardwareFragment : Fragment() {
             val selectedStatus = hardware_spinner.selectedItem
             Log.d("status body: ", hardware_spinner.selectedItemPosition.toString())
 
-            if (selectedStatus == text_view_status.text) {
+            if (selectedStatusId == initStatusId) {
                 Toast.makeText(context, "Please change status of hardware!", Toast.LENGTH_SHORT).show()
             } else {
                 Log.d("hardware status: ", selectedStatusId.toString())
                 compositeDisposable.add(
-                    hardwareRepository.changeHardwareStatus(text_view_id.text.toString().toInt(), selectedStatusId + 1)
+                    hardwareRepository.changeHardwareStatus(text_view_id.text.toString().toInt(), selectedStatusId)
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe ({
                             Toast.makeText(context, "Status has been changed successfully!", Toast.LENGTH_SHORT).show()
-                            //initStatusId = selectedStatusId
-                            text_view_status.text = selectedStatus.toString()
+                            initStatusId = selectedStatusId
+                            //text_view_status.text = selectedStatus.toString()
                         }, {
                                 throwable -> Log.d("excepton: ", throwable.message)
                                 Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show()

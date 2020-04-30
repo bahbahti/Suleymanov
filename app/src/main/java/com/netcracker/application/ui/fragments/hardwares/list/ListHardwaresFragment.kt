@@ -1,9 +1,11 @@
 package com.netcracker.application.ui.fragments.hardwares.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -45,7 +47,6 @@ class ListHardwaresFragment : Fragment(), ChooseDetailListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ListHardwaresViewModel::class.java)
         hardwareRepository = HardwareRepositoryProvider
             .providehardwarerepository()
         val llm = LinearLayoutManager(context)
@@ -56,12 +57,15 @@ class ListHardwaresFragment : Fragment(), ChooseDetailListener {
             hardwareRepository.getHardwareList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe {
+                .subscribe ({
                     hardwareList.addAll(it.content)
                     listAdapter = HardwareListAdapter(hardwareList)
                     listAdapter.addListener(this)
                     listView.adapter = listAdapter
-                }
+                }, {
+                        throwable -> Log.d("excepton: ", throwable.message)
+                        Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show()
+                    })
         )
 
     }
