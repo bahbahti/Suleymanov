@@ -36,7 +36,6 @@ class DetailedHardwareFragment : Fragment() {
             .providehardwarerepository()
 
         prosessGetList()
-        //prosessButtonClick()
         buildSpinner()
 
         hardware_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -50,57 +49,6 @@ class DetailedHardwareFragment : Fragment() {
             }
         }
 
-
-/*        val idField ="Id: "
-        val statusField ="Status: "
-        val serialField ="Serial: "
-        var initStatusId : Int = 1
-        var initHardwareId : Int = 1
-
-        compositeDisposable.add(
-            hardwareRepository.getHardware(DetailedHardwareFragmentArgs.fromBundle(requireArguments()).detailedHardwareId)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe {
-                    initHardwareId = it.id
-                    initStatusId = it.hardwareStatus.id - 1
-                    text_view_id.text = idField + initHardwareId.toString()
-                    text_view_name.text = it.name
-                    text_view_serial.text = serialField + it.serial
-                    text_view_status.text = statusField + it.hardwareStatus.toString()
-                    hardware_spinner.setSelection(initStatusId)
-
-                }
-        )*/
-
-/*        button.setOnClickListener {
-            val selectedStatusId = hardware_spinner.selectedItemPosition
-            Log.d("STATUS-ID ", hardware_spinner.selectedItemPosition.toString())
-            Log.d("StATUS-LOG",  hardware_spinner.selectedItem.toString())
-
-            if (selectedStatusId == initStatusId) {
-                Toast.makeText(context, "Please change status of hardware!", Toast.LENGTH_SHORT).show()
-            }
-
-            else {
-                //TODO implement if(statuscode == OK)
-                Log.d("HARDwARE_stATUS_LOG", selectedStatusId.toString())
-                compositeDisposable.add(
-                    hardwareRepository.changeHardwareStatus(initHardwareId, selectedStatusId - 1)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe ({}, {throwable -> Log.d("excepton-LOG", throwable.message)}
-                    )
-                )
-
-                //hardwareRepository.changeHardwareStatus(initHardwareId, selectedStatusId)
-                Toast.makeText(context, "Status has been changed successfully!", Toast.LENGTH_SHORT).show()
-                initStatusId = selectedStatusId
-                //TODO implement else (Throw exception)
-            }
-
-        }*/
-
     }
 
     private fun prosessGetList() {
@@ -113,15 +61,11 @@ class DetailedHardwareFragment : Fragment() {
                     text_view_name.text = it.name
                     text_view_serial.text = it.serial
                     text_view_status.text = it.hardwareStatus.name
-                    //hardware_spinner.setSelection(initStatusId)
                 }
         )
     }
 
     private fun prosessButtonClick(selectedStatusId: Int) {
-        hardwareRepository = HardwareRepositoryProvider
-            .providehardwarerepository()
-
         Log.d("status id: ",  selectedStatusId.toString())
         button.setOnClickListener {
             val selectedStatus = hardware_spinner.selectedItem
