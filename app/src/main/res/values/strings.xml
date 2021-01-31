@@ -1,17 +1,13 @@
 <resources>
     <string name="app_name">Application</string>
-    <string name="users">Users</string>
     <string name="hardwares">Hardwares</string>
-    <string name="settings">Settings</string>
-    <string name="loading">Loading</string>
-    <string name="update">UPDATE</string>
-    <string name="update_status">update status</string>
+    <string name="best">Best</string>
+    <string name="title">Let`s watch gifs!!!</string>
+    <string name="smth_went_wrng">Error happened. Please check network connection</string>
+    <string name="bnt_retry">Retry</string>
+    <string name="retry">Retry</string>
+    <string name="load_new">Load</string>
+    <string name="back">Back</string>
 
-    <string-array name="status_array">
-        <item>NORMAL</item>
-        <item>FAILED</item>
-        <item>UNDER-MAINT</item>
-        <item>TO-REPLACE</item>
-    </string-array>
 
 </resources>
